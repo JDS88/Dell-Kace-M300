@@ -1,0 +1,58 @@
+baudrate=115200
+loads_echo=0
+rootpath=/mnt/ARM_FS/
+usiversion=kacemini-1.5
+console=console=ttyS0,115200 mtdparts=spi_flash:0x7f000@0(uboot),0x1000@0x7f000(u-boot-env)
+CASset=min
+MALLOC_len=1
+ethprime=egiga0
+bootargs_root=root=/dev/nfs rw
+bootargs_end=:::DB88FXX81:eth0:none
+image_name=uImage
+standalone=fsload 0x2000000 $(image_name);setenv bootargs $(console) root=/dev/mtdblock0 rw ip=$(ipaddr):$(serverip)$(bootargs_end) $(mvPhoneConfig); bootm 0x2000000;
+ethmtu=1500
+mvPhoneConfig=mv_phone_config=dev0:fxs,dev1:fxs
+mvNetConfig=mv_net_config=(00:11:88:0f:62:81,0:1:2:3),mtu=1500
+usb0Mode=host
+yuk_ethaddr=00:00:00:EE:51:81
+netretry=no
+rcvrip=169.254.100.100
+loadaddr=0x02000000
+autoload=no
+ethact=egiga0
+filesize=728c0
+fileaddr=1200000
+netmask=255.255.255.0
+ipaddr=192.168.58.233
+serverip=192.168.58.188
+ethaddr=18:03:73:41:da:fa
+run_diag=yes
+bootargs_console=console=ttyS0,115200 mtdparts=spi_flash:0x7f000@0(uboot),0x1000@0x7f000(u-boot-env)
+bootcmd_ide=run bootcmd_ideload; setenv bootargs $(bootargs_console); bootm 0x100000 0x01100000
+bootcmd_ideload=ide reset; ext2load ide 0:1 0x100000 /uImage; ext2load ide 0:1 0x01100000 /uInitrd
+bootcmd=run bootcmd_ide
+bootcmd2=ide reset; ext2load ide 0:2 0x100000 /kbox/bin/uImage.bak; ext2load ide 0:1 0x01100000 /uInitrd;bootm 0x100000 0x01100000
+bootargs=console=ttyS0,115200 mtdparts=spi_flash:0x7f000@0(uboot),0x1000@0x7f000(u-boot-env)
+kernel2bootup=no
+stdin=serial
+stdout=serial
+stderr=serial
+mainlineLinux=no
+enaMonExt=no
+enaCpuStream=no
+enaWrAllo=no
+pexMode=RC
+disL2Cache=no
+setL2CacheWT=yes
+disL2Prefetch=yes
+enaICPref=yes
+enaDCPref=yes
+sata_dma_mode=yes
+netbsd_en=no
+vxworks_en=no
+bootdelay=3
+disaMvPnp=no
+enaAutoRecovery=yes
+pcieTune=no
+
+Environment size: 1697/4092 bytes
