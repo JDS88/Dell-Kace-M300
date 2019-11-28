@@ -1,0 +1,5 @@
+Compile the Device Tree source file:
+> dtc -O dtb -o kirkwood-m300.dtb kirkwood-m300.dts
+
+Decompile the Device Tree blob file:
+> dtc -I dtb -O dts kirkwood-m300.dtb
