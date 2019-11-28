@@ -1,0 +1,27 @@
+Download the updated root filesystem from DropBox: https://bitly.com/2Nx3XfY
+
+  Debian-5.2.9-kirkwood-tld-1-rootfs-bodhi.tar.bz2
+  md5: cd8ad170aa1a9fdc2a0a1c43ab1c0721
+  sha256: 8ccbbced367b4c2bf3728262e882f8232aff0fecd1c0c767219a0cab49a0b9bf
+
+1. Format the SSD/HDD with a single ext3 partition. If your drive is sdb1:
+  > mkfs.ext3 /dev/sdb1
+
+2. Label the new partition rootfs:
+  > e2label /dev/sdb1 rootfs
+  
+3. Mount the partition:
+  > mkdir /mnt/sdb1
+  > mount /dev/sdb1 /mnt/sdb1
+
+4. Extract the filesystem:
+  > cd /mnt/sdb1 
+  > tar -xjf Debian-5.2.9-kirkwood-tld-1-rootfs-bodhi.tar.bz2
+  
+5. Be sure to generate new SSH host key(s) on successful boot:
+  > rm /etc/ssh/ssh_host*
+  > ssh-keygen -A
+  
+6. Update any old packages:
+  > apt-get update
+  > apt-get upgrade
