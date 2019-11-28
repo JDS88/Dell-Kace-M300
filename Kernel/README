@@ -1,0 +1,13 @@
+Copy the compressed kernel to a new Flattened Device Tree kernel:
+> cp -a zImage-5.3.2-kirkwood-tld-1 zImage.fdt
+
+Concatenate the Device Tree blob with the new kernel:
+> cat kirkwood-m300.dtb >> zImage.fdt
+
+Create a U-Boot compatible kernel image from the Flattened Device Tree kernel:
+> mkimage -A arm -O linux -T kernel -C none -a 0x00008000 -e 0x00008000 -n Linux-5.3.2-kirkwood-tld-1 -d zImage.fdt uImage
+
+Create a U-Boot compatible RamDisk image from the existing existing initrd file:
+> mkimage -A arm -O linux -T ramdisk -C gzip -a 0x00000000 -e 0x00000000 -n initramfs-5.3.2-kirkwood-tld-1 -d initrd.img-5.3.2-kirkwood-tld-1 uInitrd
+
+*Requires installation of uboot-mkimage
